@@ -17,8 +17,8 @@ import org.phash.AudioMetaData;
 import org.phash.AudioData;
 import org.phash.phashaudio.AudioHasher;
 import org.phash.phashaudio.AudioHashInfo;
-import org.phash.audioscout.hash.QuerySender;
-import org.phash.audioscout.hash.MatchResult;
+import org.phash.phashaudio.QuerySender;
+import org.phash.phashaudio.MatchResult;
 
 public class AudioScout {
 

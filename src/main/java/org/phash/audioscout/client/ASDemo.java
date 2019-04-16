@@ -17,7 +17,7 @@ import org.phash.AudioData;
 import org.phash.AudioMetaData;
 import org.phash.phashaudio.AudioHasher;
 import org.phash.phashaudio.AudioHashInfo;
-import org.phash.audioscout.hash.MatchResult;
+import org.phash.phashaudio.MatchResult;
 import org.phash.audioscout.server.KratiMetaDataStore;
 import org.phash.audioscout.server.KratiAudioHashStore;
 import org.phash.audioscout.server.KratiAudioHashStore.FoundId;
