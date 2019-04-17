@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.phash.audioscout</groupId>
   <artifactId>JAudioScout</artifactId>
-  <version>1.0.0</version>
+  <version>0.0.1</version>
   <name>JAudioScout</name>
   <packaging>jar</packaging>
   <url>http://maven.apache.org</url>
@@ -165,9 +165,6 @@
 	<groupId>org.apache.maven.plugins</groupId>
 	<artifactId>maven-surefire-plugin</artifactId>
 	<version>3.0.0-M1</version>
-	<configuration>
-	  <testFailureIgnore>false</testFailureIgnore>
-	</configuration>
   </plugin>
   </plugins>
   </build>
@@ -205,13 +202,13 @@
     <dependency>
       <groupId>org.phash</groupId>
       <artifactId>JAudioData</artifactId>
-      <version>1.0.0</version>
+      <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.phash.phashaudio</groupId>
       <artifactId>JPHashAudio</artifactId>
-      <version>1.0.0</version>
+      <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
