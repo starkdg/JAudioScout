@@ -18,7 +18,6 @@ a CLI client application for testing purposes - called AudioScout.
 mvn package
 ```
 
-
 # API
 
 The server API is provided by the Auscoutd server. It provides
@@ -57,8 +56,7 @@ Two options must be provided: -homedir and -mdata, which are the locations of di
 for file storage for the data stores.  Be sure you have plentiful space in these directories.
 
 
-#client API
-
+# Client API
 
 There is an example client program, AudioScout, which can be accessed by the corresponding script
 in the bin directory.  Simply invoke with no arguments for usage information:
@@ -67,7 +65,7 @@ in the bin directory.  Simply invoke with no arguments for usage information:
 
 The 'print' option allows for printing out the audio hash values for each audio file in a directory.  
 
-#utility
+# Utility
 
 MDataScroll is a utility to scroll through the indexed entries in the meta data index.
 
