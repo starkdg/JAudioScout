@@ -6,7 +6,10 @@ of a server which responds to commands from client
 applications.
 
 An API package for designing and building custom client applications
-can be found here [JPHashAudio](https://github.com/starkdg/JPhashAudio.)
+can be found here [JPHashAudio](https://github.com/starkdg/JPhashAudio)
+
+You will also need [libAudioData](https://github.com/starkdg/libAudioData)
+along with its java bindings for reading audio files.
 
 This package consists of just the AudioScout server, auscoutd, and
 a CLI client application for testing purposes - called AudioScout.
