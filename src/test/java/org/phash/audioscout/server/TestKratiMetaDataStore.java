@@ -21,56 +21,52 @@ public class TestKratiMetaDataStore {
 
     @BeforeClass static public void testCreateMetaDataStore(){
 
-	File storeDir = new File(homedir);
-	try {
-	    store = new KratiMetaDataStore(storeDir, 1000, 5, 64, false);
-	} catch (Exception ex){
-	    System.out.println("unable to init metadata store - " + ex.getMessage());
-	}
-	assert(store != null);
+		File storeDir = new File(homedir);
+		try {
+			store = new KratiMetaDataStore(storeDir, 1000, 5, 64, false);
+		} catch (Exception ex){
+			assert(false);
+		}
+		assert(store != null);
 	
-	try {
-	    key = store.storeMetaData(valueString);
-	} catch (Exception ex){
-	    System.out.println("unable to store metadata - " + ex.getMessage());
-	}
-	assert(key != 0);
+		try {
+			key = store.storeMetaData(valueString);
+		} catch (Exception ex){
+			assert(false);
+		}
+		assert(key != 0);
     }
 
     @Test public void testStoreMetaData(){
-	int key2 = 0;
-	try {
-	    key2 = store.storeMetaData("Another line ... ");
-	} catch (Exception ex){
-	    System.out.println("unable to store metadata - " + ex.getMessage());
-	}
-	assert(key2 != 0);
+		int key2 = 0;
+		try {
+			key2 = store.storeMetaData("Another line ... ");
+		} catch (Exception ex){
+			assert(false);
+		}
+		assert(key2 != 0);
     }
 
     @Test public void testGetMetaData(){
-	String retrievedStr = store.getMetaData(key);
-	assert(retrievedStr.compareTo(valueString) == 0);
+		String retrievedStr = store.getMetaData(key);
+		assert(retrievedStr.compareTo(valueString) == 0);
     }
 
     @AfterClass static public void testDeleteId(){
-	boolean deleted = true;
-	try {
-	    deleted = store.deleteId(key);
-	} catch (Exception ex){
-	    System.out.println("unable to delete id" + ex.getMessage());
-	    deleted = false;
-	}
-	assert(deleted);
+		boolean deleted = true;
+		try {
+			deleted = store.deleteId(key);
+		} catch (Exception ex){
+			assert(false);
+		}
     }
 
     @After public void testSync(){
-	boolean done = true;
-	try {
-	    store.sync();
-	} catch (Exception ex){
-	    System.out.println("unable to sync datastore - " + ex.getMessage());
-	    done = false;
-	}
-	assert(done);
+		boolean done = true;
+		try {
+			store.sync();
+		} catch (Exception ex){
+			assert(false);
+		}
     }
 }

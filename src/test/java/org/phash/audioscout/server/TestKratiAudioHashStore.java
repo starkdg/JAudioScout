@@ -22,113 +22,91 @@ public class TestKratiAudioHashStore {
     static public KratiAudioHashStore hashstore;
 
     @BeforeClass static public void testCreateAudioHashStore(){
-	File storeDir = new File(homedir);
-	try {
-	    hashstore = new KratiAudioHashStore(storeDir, 100, 500, 64, false);
-	} catch (IOException ex){
-	    System.out.println("unable to init data store - " + ex.getMessage());
-	}	    
-	assert(hashstore != null);
+		File storeDir = new File(homedir);
+		try {
+			hashstore = new KratiAudioHashStore(storeDir, 100, 500, 64, false);
+		} catch (IOException ex){
+			assert(false);
+		}	    
+		assert(hashstore != null);
 
-	Random rnd = new Random(2823832);
-	array = new int[length];
-
-	for (int i=0;i<length;i++){
-	    array[i] = rnd.nextInt();
+		Random rnd = new Random(2823832);
+		array = new int[length];
+		
+		for (int i=0;i<length;i++){
+			array[i] = rnd.nextInt();
+		}
+		
+		boolean stored = true;
+		try {
+			stored = hashstore.storeAudioHash(guid, array);
+		} catch (Exception ex){
+			stored = false;
+			assert(false);
+		}
 	}
-
-	boolean stored = true;
-	try {
-	    stored = hashstore.storeAudioHash(guid, array);
-	} catch (Exception ex){
-	    stored = false;
-	    System.out.println("unable to store - " + ex.getMessage());
-	}
-	assert(stored);
-    }
-
 
     @Test public void testGetCandidates(){
-	System.out.printf("test getCandidates function ...\n");
+		int P = 3;
+		int nbcands = 1 << P;
+		int value = 0x00000000;
+		int toggles = 0x00000007;
+		int[] candidates = new int[nbcands];
 
-	int P = 3;
-	int nbcands = 1 << P;
-	int value = 0x00000000;
-	int toggles = 0x00000007;
-	int[] candidates = new int[nbcands];
+		hashstore.getCandidates(value, toggles, candidates);
 
-	hashstore.getCandidates(value, toggles, candidates);
+		toggles = 0xe0000000;
+		hashstore.getCandidates(value, toggles, candidates);
 
-	System.out.printf("permutations:\n");
-	for (int i=0;i<nbcands;i++){
-	    System.out.printf(" %x ", candidates[i]);
-	}
-	System.out.printf("\n");
-
-	toggles = 0xe0000000;
-	hashstore.getCandidates(value, toggles, candidates);
-	System.out.printf("permutations:\n");
-	for (int i=0;i<nbcands;i++){
-	    System.out.printf(" %x ", candidates[i]);
-	}
-	System.out.printf("\n");
-
-	assert(true);
+		assert(true);
     }
 
     @Test public void testStore(){
-	int uid = 4000;
-	Random rnd = new Random(1234567890);
-	int[] array2 = new int[length];
+		int uid = 4000;
+		Random rnd = new Random(1234567890);
+		int[] array2 = new int[length];
 
-	System.out.println("test store ... ");
-	for (int i=0;i<length;i++){
-	    array2[i] = rnd.nextInt();
-	}
+		for (int i=0;i<length;i++){
+			array2[i] = rnd.nextInt();
+		}
 
-	boolean stored = true;
-	try {
-	    stored = hashstore.storeAudioHash(uid, array2);
-	} catch (Exception ex){
-	    stored = false;
-	    System.out.println("unable to store - " + ex.getMessage());
-	}
-	assert(stored);
+		boolean stored = true;
+		try {
+			stored = hashstore.storeAudioHash(uid, array2);
+		} catch (Exception ex){
+			assert(false);
+		}
     }
 
     @Test public void testLookup(){
-	int qlength = length/10;
-	int[] qarray = new int[qlength];
-	System.arraycopy(array, 0, qarray, 0, qlength);
+		int qlength = length/10;
+		int[] qarray = new int[qlength];
+		System.arraycopy(array, 0, qarray, 0, qlength);
 
-	ArrayList<KratiAudioHashStore.FoundId> list = hashstore.lookupAudioHash(qarray, null, threshold, bs);
-	assert(list.size() > 0);
+		ArrayList<KratiAudioHashStore.FoundId> list = hashstore.lookupAudioHash(qarray, null, threshold, bs);
+		assert(list.size() > 0);
 
-	KratiAudioHashStore.FoundId result = list.get(0);
-	assert(result.id == guid.intValue());
-
+		KratiAudioHashStore.FoundId result = list.get(0);
+		assert(result.id == guid.intValue());
     }
 
     @Test public void testSync(){
-	boolean success = true;
-	try {
-	    hashstore.sync();
-	} catch (IOException ex){
-	    System.out.println("unable to sync datastore - " + ex.getMessage());
-	    success = false;
-	}
-	assert(success);
+		boolean success = true;
+		try {
+			hashstore.sync();
+		} catch (IOException ex){
+			success = false;
+		}
+		assert(success);
     }
 
-
     @AfterClass static public void testClose(){
-	boolean success = true;
-	try {
-	    hashstore.close();
-	} catch (IOException ex){
-	    System.out.println("unable to close data store - " + ex.getMessage());
-	    success = false;
-	}
-	assert(success);
+		boolean success = true;
+		try {
+			hashstore.close();
+		} catch (IOException ex){
+			assert(false);
+		}
+		assert(success);
     }
 }

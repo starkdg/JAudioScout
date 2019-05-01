@@ -17,8 +17,8 @@ import org.phash.AudioMetaData;
 import org.phash.AudioData;
 import org.phash.phashaudio.AudioHasher;
 import org.phash.phashaudio.AudioHashInfo;
-import org.phash.phashaudio.QuerySender;
-import org.phash.phashaudio.MatchResult;
+import org.phash.audioscout.net.QuerySender;
+import org.phash.audioscout.net.MatchResult;
 
 public class AudioScout {
 
@@ -108,15 +108,16 @@ public class AudioScout {
 					System.out.printf("no. samples %d, no. frames %d\n", signal.length, hashinfo.hasharray.length);
 					
 					if (options.command.compareToIgnoreCase("query") == 0){
-						System.out.printf("query with p=%d, threshold=%f, nbframes=%d\n", 
-										  options.nbtoggles, options.threshold, hashinfo.hasharray.length);
 						List<MatchResult> results = sender.sendQuery(hashinfo.hasharray, hashinfo.toggles, 
 																	 options.threshold, options.blockSize);
 						int count = 0;
-						System.out.println("FOUND " + results.size() + " results.");
-						for (MatchResult res : results){
-							System.out.printf("Found(%d) %s\n", count, res.name);
-							System.out.printf("          cs = %f, pos = %d, id = %d\n", res.cs, res.position, res.id);
+						if (results.size() > 0){
+							System.out.println("-->FOUND " + results.size() + " results.");
+							for (MatchResult res : results){
+								System.out.printf("    Found(%d) %s ", count, res.name);
+								System.out.printf("(cs = %f, pos = %d, id = %d)\n", res.cs, res.position, res.id);
+								count++;
+							}
 						}
 						
 					} else if (options.command.compareToIgnoreCase("submit") == 0){
@@ -135,6 +136,7 @@ public class AudioScout {
 						break;
 					}
 					System.out.println("----------------------------------------");
+					System.out.printf("\n\n");
 				}
 			}		
 		}

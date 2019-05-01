@@ -82,32 +82,26 @@
 	      <mainClass>org.phash.audioscout.client.AudioScout</mainClass>
 	      <name>AudioScout</name>
 	      <jvmSettings>
-		<extraArguments>
-		  <extraArgument>-Djava.library.path=/usr/local/lib</extraArgument>
-		</extraArguments>
-	      </jvmSettings>
+			<initialMemorySize>256m</initialMemorySize>
+			<maxMemorySize>1g</maxMemorySize>
+			<maxStackSize>64m</maxStackSize>
+			<extraArguments>
+			  <extraArgument>-Djava.library.path=${java.library.path}:/usr/local/lib</extraArgument>
+			</extraArguments>
+		  </jvmSettings>
 	    </program>
 	    <program>
 	      <mainClass>org.phash.audioscout.server.Auscoutd</mainClass>
 	      <name>Auscoutd</name>
 	      <jvmSettings>
-		<initialMemorySize>256m</initialMemorySize>
-		<maxMemorySize>4g</maxMemorySize>
-		<maxStackSize>128m</maxStackSize>
+			<initialMemorySize>256m</initialMemorySize>
+			<maxMemorySize>4g</maxMemorySize>
+			<maxStackSize>128m</maxStackSize>
 	      </jvmSettings>
 	    </program>
 	    <program>
 	      <mainClass>org.phash.audioscout.util.MDataScroll</mainClass>
 	      <name>MDataScroll</name>
-	    </program>
-	    <program>
-	      <mainClass>org.phash.audioscout.client.ASDemo</mainClass>
-	      <name>ASDemo</name>
-	      <jvmSettings>
-		<extraArguments>
-		  <extraArgument>-Djava.library.path=/usr/local/lib</extraArgument>
-		</extraArguments>
-	      </jvmSettings>
 	    </program>
 	  </programs>
       </configuration>
@@ -119,36 +113,7 @@
 	    <goal>assemble</goal>
 	  </goals>
 	</execution>
-	<execution>
-	  <id>generate-demo</id>
-	  <phase>package</phase>
-	  <configuration>
-	    <copyConfigurationDirectory>true</copyConfigurationDirectory>
-	    <configurationDirectory>etc</configurationDirectory>
-	    <repositoryLayout>flat</repositoryLayout>
-	    <assembleDirectory>${project.build.directory}/ASDemo</assembleDirectory>
-	    <target>${project.build.directory}</target>
-	    <useWildcardClassPath>true</useWildcardClassPath>
-	    <platforms>
-	      <platform>all</platform>
-	    </platforms>
-	    <programs>
-	      <program>
-		<mainClass>org.phash.audioscout.client.ASDemo</mainClass>
-		<name>ASDemo</name>
-		<jvmSettings>
-		  <extraArguments>
-		    <extraArgument>-Djava.library.path=/usr/local/lib</extraArgument>
-		  </extraArguments>
-		</jvmSettings>
-	      </program>
-	    </programs>
-	  </configuration>
-	  <goals>
-	    <goal>assemble</goal>
-	  </goals>
-	</execution>
-      </executions>
+   </executions>
   </plugin>
   <plugin>
     <artifactId>maven-clean-plugin</artifactId>
