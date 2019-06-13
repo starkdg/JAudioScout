@@ -1,9 +1,11 @@
 # JAudioScout 
 
-AudioScout is an audio identification system that allows for
+AudioScout&trade; is an audio identification system that allows for
 reasonable distortion in the audio signal.  The system consists
 of a server which responds to commands from client
 applications.
+
+You can read more about it in this blog post: [here](http://blog.phash.org/posts/audioscout)
 
 An API package for designing and building custom client applications
 can be found here [JPHashAudio](https://github.com/starkdg/JPhashAudio)
@@ -15,11 +17,27 @@ This package consists of just the AudioScout server, auscoutd, and
 a CLI client application for testing purposes - called AudioScout.
 
 
+# Results
+
+Recall reaches a 95% accuracy. This is based on 110 
+queries against an index holding over 1200 audio tracks.
+The query clips represent a fairly serious telephone distortion with an
+added Gaussian noise.  The test was conducted various clip durations
+and toggle settings.  A toggle settings is number of bits to consider
+flipping when looking up candidate hash frames in the sequence.
+
+![test results](table3.png "Recall Accuracy")
+
 # Build
 
+To build the package,
+
 ```
-mvn package
+mvn compile test package
 ```
+
+This should put the executables in the target bin directory.
+
 
 # API
 
