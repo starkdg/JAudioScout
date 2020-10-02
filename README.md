@@ -1,5 +1,10 @@
 # JAudioScout 
 
+## Update: JAudioscout no longer being maintained
+
+See [Redis-AudioScout](https://github.com/starkdg/Redis-AudioScout) for a revised implementation
+based on Redis making it easier to build and deploy.  
+
 AudioScout&trade; is an audio identification system that allows for
 reasonable distortion in the audio signal.  The system consists
 of a server which responds to commands from client
